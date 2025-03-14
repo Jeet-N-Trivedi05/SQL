@@ -1,3 +1,5 @@
+-- 0. CREATING A TABLE 
+
 CREATE TABLE practice_data (
     id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50),
@@ -231,7 +233,7 @@ RENAME COLUMN salary TO monthly_salary;
 -- 8. DROPPING THE COLUMN
 
 ALTER TABLE practice_data 
-DROP COLUMN column_name;
+DROP COLUMN SALARY;
 
 -- 9. ADDING NEW COLUMN 
 
@@ -246,6 +248,45 @@ ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE practice_data 
 MODIFY COLUMN age SMALLINT;
 
+-- 11. CONVERTING DATA TYPE 
+
+-- UPDATING DATA TYPE OF ENITE COLUMN  
+
+ALTER TABLE practice_data 
+MODIFY COLUMN age INT;
+
+-- UPDATING VALUE WHILE QUERYING 
+-- LIKE HERE FETCHING AGE VALUE AS CHARACTER INSTEAD OF NUMBER / INT
+SELECT CAST(age AS CHAR) AS age_as_text FROM practice_data;
+
+
+-- 12. SELECT INTO [NOT ALLOWED IN MY SQL] ONLY FOR SQL SERVER OR ORACAL OR PG DB 
+
+SELECT first_name, last_name, monthly_salary
+INTO high_salary_employees
+FROM practice_data pd 
+WHERE monthly_salary > 70000;
+
+-- 13. TEMP TABLE AND CTE 
+
+-- TEMP TABLE
+
+-- CREATE TEMPORARY TABLE high_salary_employees AS 
+-- SELECT emp_id, emp_name, salary 
+-- FROM employees 
+-- WHERE salary > (SELECT AVG(salary) FROM employees);
+-- 
+-- SELECT * FROM high_salary_employees;
+
+
+-- WITH CTE
+
+-- WITH high_salary_employees AS (
+--     SELECT emp_id, emp_name, salary 
+--     FROM employees 
+--     WHERE salary > (SELECT AVG(salary) FROM employees)
+-- )
+-- SELECT * FROM high_salary_employees;
 
 
 
